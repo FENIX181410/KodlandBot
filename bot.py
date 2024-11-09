@@ -1,5 +1,6 @@
 import discord
 from discord.ext import commands
+from bot_logic import gen_pass, gen_emoji, flip_coin
 
 intents = discord.Intents.default()
 intents.message_content = True
@@ -11,11 +12,19 @@ async def on_ready():
     print(f'We have logged in as {bot.user}')
 
 @bot.command()
-async def hello(ctx):
-    await ctx.send(f'Hola, soy un bot {bot.user}!')
+async def hola(ctx):
+    await ctx.send(f'Hola,{client.user} soy el bot {bot.user}!')
 
 @bot.command()
-async def heh(ctx, count_heh = 5):
-    await ctx.send("he" * count_heh)
+async def contraseña(ctx, x):
+    await ctx.send(gen_pass(x))
 
-bot.run("MTMwMjA3NDk5NTUxMzYyNjY0NA.Go_RA3.BuWsviIBfnFOqIF-hDvXl22UdP5R2ZDGrfTfZk")
+@bot.command()
+async def emoji(ctx):
+    await ctx.send(gen_emoji())
+
+@bot.command()
+async def moneda(ctx):
+    await ctx.send(flip_coin())
+
+bot.run("TOKEN AQUÍ")
