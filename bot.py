@@ -1,6 +1,6 @@
 import discord
 from discord.ext import commands
-from bot_logic2 import gen_pass, gen_emoji, flip_coin, juego
+from bot_logic import gen_pass, gen_emoji, flip_coin, juego
 
 intents = discord.Intents.default()
 intents.message_content = True
