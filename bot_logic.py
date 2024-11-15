@@ -1,6 +1,6 @@
 import random
 
-def gen_pass(pass_length):
+def gen_pass(pass_length:int):
     elements = "+-/*!&$#?=@<>"
     password = ""
 
@@ -20,51 +20,46 @@ def flip_coin():
     else:
         return "Cruz"
     
-def juego():
-    print("Ok, cada uno empieza con una bala. Dime 'terminar' cuando quieras acabar el juego.")
+def juego(jugador):
     balas = 1
     opciones = ["recargar", "disparar", "bloquear"]
     
-    while True:
-        jugador = input("Elige una opción (disparar, recargar, bloquear): ")
-        if jugador == "terminar":
-            print("El juego ha terminado.")
-            exit()
+    elección = random.choice(opciones)
         
-        if balas == 0:
-            opciones = ["recargar", "bloquear"] 
-        else:
-            opciones = ["recargar", "disparar", "bloquear"]
+    if jugador == "disparar":
+        if elección == "disparar":
+            balas-=1
+            if balas == 0:
+                opciones = ["recargar", "bloquear"] 
+            return"Los dos hemos disparado, las balas se chocan. Seguimos jugando."
+        elif elección == "bloquear":
+            return "Me disparaste mientras bloqueaba. Seguimos jugando."
+        elif elección == "recargar":
+            return"Me disparaste mientras recargaba. Has ganado."
+                
+    elif jugador == "bloquear":
+        if elección == "disparar":
+            balas-=1
+            if balas == 0:
+                opciones = ["recargar", "bloquear"] 
+            return"Te disparé mientras bloqueabas. Seguimos jugando."
+        elif elección == "bloquear":
+            return"Los dos hemos bloqueado. Seguimos jugando."
+        elif elección == "recargar":
+            balas+=1
+            if balas == 0:
+                opciones = ["recargar", "bloquear"]
+            return"He recargado mientras bloqueabas. Seguimos jugando."
         
-        elección = random.choice(opciones)
-        
-        if jugador == "disparar":
-            if elección == "disparar":
-                balas-=1
-                print("Los dos hemos disparado, las balas se chocan. Seguimos jugando.")
-            elif elección == "bloquear":
-                print("Me disparaste mientras bloqueaba. Seguimos jugando.")
-            elif elección == "recargar":
-                print("Me disparaste mientras recargaba. Has ganado.")
-                exit()
- 
-        
-        elif jugador == "bloquear":
-            if elección == "disparar":
-                balas-=1
-                print("Te disparé mientras bloqueabas. Seguimos jugando.")
-            elif elección == "bloquear":
-                print("Los dos hemos bloqueado. Seguimos jugando.")
-            elif elección == "recargar":
-                balas+=1
-                print("He recargado mientras bloqueabas. Seguimos jugando.")
-        
-        elif jugador == "recargar":
-            if elección == "disparar":
-                print("Te he disparado mientras recargabas. He ganado.")
-                exit()
-            elif elección == "bloquear":
-                print("He bloqueado mientras recargaba. Seguimos jugando.")
-            elif elección == "recargar":
-                balas+=1
-                print("Los dos hemos recargado. Seguimos jugando.")
+    elif jugador == "recargar":
+        if elección == "disparar":
+            return"Te he disparado mientras recargabas. He ganado."
+        elif elección == "bloquear":
+            return"He bloqueado mientras recargabas. Seguimos jugando."
+        elif elección == "recargar":
+            balas+=1
+            if balas == 0:
+                opciones = ["recargar", "bloquear"] 
+            return"Los dos hemos recargado. Seguimos jugando."
+            
+    return "Opción no válida. Escoge entre 'recargar', 'disparar' o 'bloquear'."    
