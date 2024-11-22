@@ -1,6 +1,7 @@
 import discord
 from discord.ext import commands
-from bot_logic import gen_pass, gen_emoji, flip_coin, juego
+from bot_logic2 import gen_pass, gen_emoji, flip_coin, juego
+import os
 
 intents = discord.Intents.default()
 intents.message_content = True
@@ -53,5 +54,30 @@ async def terminar(ctx):
         await ctx.send("El juego ha terminado.")
     else:
         await ctx.send("No tienes un juego en curso.")
+        
+@bot.command()
+async def meme(ctx):
+    Lista= os.listdir('Kodland/Clase 5/memes')
+    for i in Lista:
+        with open(f'Kodland/Clase 5/memes/{i}', 'rb') as f:
+            picture = discord.File(f)
+            await ctx.send(file=picture)
+            
+@bot.command()
+async def juegos(ctx):
+    Lista= os.listdir('Kodland/Clase 5/juegos')
+    for i in Lista:
+        with open(f'Kodland/Clase 5/juegos/{i}', 'rb') as f:
+            picture = discord.File(f)
+            await ctx.send(file=picture)            
+            
+@bot.command()
+async def música(ctx):
+    Lista= os.listdir('Kodland/Clase 5/Artistas')
+    for i in Lista:
+        with open(f'Kodland/Clase 5/Artistas/{i}', 'rb') as f:
+            picture = discord.File(f)
+            await ctx.send(file=picture)                  
+
 
 bot.run("TOKEN")
