@@ -1,6 +1,6 @@
 import discord
 from discord.ext import commands
-from bot_logic2 import gen_pass, gen_emoji, flip_coin, juego
+from bot_logic import gen_pass, gen_emoji, flip_coin, juego, reciclaje
 import os
 
 intents = discord.Intents.default()
@@ -77,7 +77,25 @@ async def música(ctx):
     for i in Lista:
         with open(f'Kodland/Clase 5/Artistas/{i}', 'rb') as f:
             picture = discord.File(f)
-            await ctx.send(file=picture)                  
+            await ctx.send(file=picture)  
+
+@bot.command()
+async def reciclaje_informacion(ctx):
+    await ctx.send("Listo, quieres saber sobre el reciclaje? Mira esta imagen.")
+    with open(f'Kodland/Clase 6/reciclaje/reciclaje.jpeg', 'rb') as f:
+            picture = discord.File(f)
+            await ctx.send(file=picture)
+    await ctx.send("Te presento el símbolo de reciclaje. Lo verás en algunos cestos de basura en los cuales puedes depositar aquellos materiales cuya vida útil puede ser renovada de una nueva manera")
+    await ctx.send("En los cestos donde no veas ese símbolo ÚNICAMENTE debes echar residuos totalmente inaprovechables a menos que quieras ver esto")
+    with open(f'Kodland/Clase 6/reciclaje/contaminacion.jpeg', 'rb') as f:
+            picture = discord.File(f)
+            await ctx.send(file=picture)
+    await ctx.send("Hagamos algo, indicame diversos materiales y yo te diré si son o no reciclables. para iniciar envía el siguiente mensaje: 'K!reciclar' acompañado del material que quieras")
+    
+@bot.command()
+async def reciclar(ctx, material:str):
+    resultado=reciclaje(material)
+    await ctx.send(resultado)
 
 
 bot.run("TOKEN")
