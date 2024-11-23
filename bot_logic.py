@@ -63,3 +63,11 @@ def juego(jugador):
             return"Los dos hemos recargado. Seguimos jugando."
             
     return "Opción no válida. Escoge entre 'recargar', 'disparar' o 'bloquear'."    
+
+def reciclaje(material):
+    reciclable=["aluminio","baterías","cartón","celulares","ropa","papel","bolsas","plástico","periódico","metal","vidrio","madera"]   
+    if material in reciclable:
+        return "Tu material sí es reciclable! No olvides depositarlo en las canecas con el símbolo de hace un rato ;)"
+    else:
+        return "Tu material no es reciclable, busca canecas que no tengan el símbolo de reciclable para depositarlo ahí ;)"
+        
